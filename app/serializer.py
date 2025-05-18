@@ -1,3 +1,4 @@
+from datetime import date
 from django.urls import reverse
 from rest_framework import serializers
 
@@ -34,3 +35,9 @@ class QatagonSerializerDetail(serializers.ModelSerializer):
     class Meta:
         model = ClassQatagon
         fields = '__all__'
+
+    def validate_tugilgan_sana(self, value):
+        if value > date.today():
+            raise serializers.ValidationError(
+                "Tug'ilgan sana hozirgi sanadan keyin bo'lishi mumkin emas")
+        return value
