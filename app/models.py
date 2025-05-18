@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth import get_user_model
 
 # Create your models here.
+
+User = get_user_model()
 
 
 class ClassQatagon(models.Model):
@@ -10,6 +13,7 @@ class ClassQatagon(models.Model):
     tugilgan_sana = models.DateField()
     vafort_etgan_sana = models.DateField()
     slug = models.SlugField(unique=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -29,6 +29,7 @@ class QatagonSerializerList(serializers.ModelSerializer):
 
 
 class QatagonSerializerDetail(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = ClassQatagon
